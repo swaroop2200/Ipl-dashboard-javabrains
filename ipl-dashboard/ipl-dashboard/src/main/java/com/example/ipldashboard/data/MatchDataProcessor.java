@@ -21,20 +21,21 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
         match.setDate(LocalDate.parse(matchInput.getDate()));
         match.setPlayerOfMatch(matchInput.getPlayer_of_match());
 
-        // set team1 and team2 based on the innings order
-        String firstInnings, secondInnings;
-        if("bat".equalsIgnoreCase(matchInput.getToss_decision())){
-            firstInnings = matchInput.getToss_winner();
-            secondInnings = matchInput.getToss_winner().equalsIgnoreCase(matchInput.getTeam1())
-                    ? matchInput.getTeam2() : matchInput.getTeam2();
-        } else {
-            secondInnings = matchInput.getToss_winner();
-            firstInnings = matchInput.getToss_winner().equalsIgnoreCase(matchInput.getTeam1())
-                    ? matchInput.getTeam2() : matchInput.getTeam2();
-        }
+        // Set Team 1 and Team 2 depending on the innings order
+        String firstInningsTeam, secondInningsTeam;
 
-        match.setTeam1(firstInnings);
-        match.setTeam2(secondInnings);
+        if ("bat".equals(matchInput.getToss_decision())) {
+            firstInningsTeam = matchInput.getToss_winner();
+            secondInningsTeam = matchInput.getToss_winner().equals(matchInput.getTeam1()) 
+                ? matchInput.getTeam2() : matchInput.getTeam1();
+
+        } else {
+            secondInningsTeam = matchInput.getToss_winner();
+            firstInningsTeam = matchInput.getToss_winner().equals(matchInput.getTeam1()) 
+                ? matchInput.getTeam2() : matchInput.getTeam1();
+        }
+        match.setTeam1(firstInningsTeam);
+        match.setTeam2(secondInningsTeam);
 
         match.setTossWinner(matchInput.getToss_winner());
         match.setTossDecision(matchInput.getToss_decision());

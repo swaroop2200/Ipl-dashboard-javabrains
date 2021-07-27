@@ -1,11 +1,15 @@
 package com.example.ipldashboard.model;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

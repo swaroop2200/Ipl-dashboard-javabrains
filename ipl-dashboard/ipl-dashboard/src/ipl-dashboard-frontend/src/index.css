@@ -1,0 +1,25 @@
+/* Index.css is like the global css that everything shares */
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0; /* if u make padding and margin as 0, it will be consistent across all browsers */
+  margin: 0;
+}
+
+/* Removing underlines for links */
+a {
+  text-decoration: none;
+  color: lightgray;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  color : white;
+  max-width: 1200px;
+  margin: 0 auto;
+}

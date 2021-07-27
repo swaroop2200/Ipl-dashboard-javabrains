@@ -1,5 +1,6 @@
 package com.example.ipldashboard.service;
 
+import com.example.ipldashboard.model.Match;
 import com.example.ipldashboard.model.Team;
 import com.example.ipldashboard.repository.MatchRepository;
 import com.example.ipldashboard.repository.TeamRepository;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -52,5 +55,12 @@ public class TeamServiceImpl implements TeamService{
         Team team =  teamRepository.findByTeamName(teamName).orElseThrow(() -> new RuntimeException("Team requested is not available"));
         team.setMatches(matchRepository.findLatestMatchesByTeam(teamName, 4));
         return team;
+    }
+
+    @Override
+    public List<Match> getMatchesForTeamForYear(String teamName, int year){
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year+1, 1, 1);
+        return matchRepository.getMatchesByTeamBetweenDates(teamName, startDate, endDate);
     }
 }
